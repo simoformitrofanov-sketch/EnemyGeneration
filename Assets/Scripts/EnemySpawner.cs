@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private Transform _target;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _spawnInterval = 2f;
 
     private Coroutine _spawnRoutine;
@@ -31,16 +29,13 @@ public class EnemySpawner : MonoBehaviour
         while (enabled)
         {
             yield return wait;
-            Spawn();
+            SpawnAtRandomPoint();
         }
     }
 
-    private void Spawn()
+    private void SpawnAtRandomPoint()
     {
-        Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-        Vector3 direction = (_target.position - spawnPoint.position).normalized;
-
-        Enemy enemy = Instantiate(_enemyPrefab, spawnPoint.position, Quaternion.identity);
-        enemy.Init(direction);
+        SpawnPoint point = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        point.Spawn();
     }
 }

@@ -4,20 +4,19 @@ public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
 
-    private Vector3 _direction;
-    private bool _hasDirection;
+    private Transform _target;
 
     private void Update()
     {
-        if (_hasDirection == false)
+        if (_target == null)
             return;
 
-        transform.position += _direction * (_speed * Time.deltaTime);
+        Vector3 direction = (_target.position - transform.position).normalized;
+        transform.position += direction * (_speed * Time.deltaTime);
     }
 
-    public void SetDirection(Vector3 direction)
+    public void SetTarget(Transform target)
     {
-        _direction = direction.normalized;
-        _hasDirection = true;
+        _target = target;
     }
 }

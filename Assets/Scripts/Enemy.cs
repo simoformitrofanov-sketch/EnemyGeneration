@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
         _mover = GetComponent<EnemyMover>();
     }
 
-    public void Init(Vector3 direction)
+    public void Init(Transform target)
     {
-        _mover.SetDirection(direction);
+        _mover.SetTarget(target);
     }
 }
