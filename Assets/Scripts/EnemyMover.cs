@@ -13,6 +13,7 @@ public class EnemyMover : MonoBehaviour
 
         Vector3 direction = (_target.position - transform.position).normalized;
         transform.position += direction * (_speed * Time.deltaTime);
+        transform.forward = direction;
     }
 
     public void SetTarget(Transform target)
